@@ -127,7 +127,7 @@ Portfolio/
 **Partha Sarathi Sarkar**
 - **GitHub**: [@Partha-zzz](https://github.com/Partha-zzz)
 - **LinkedIn**: [Partha](https://www.linkedin.com/in/partha-sarathi-sarkar-7385a8367/)
-- **Email**: atomic.here007@gmail.co
+- **Email**: atomic.here007@gmail.com
 
 ---
 
