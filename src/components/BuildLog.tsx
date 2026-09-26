@@ -17,7 +17,7 @@ export default function BuildLog() {
         badgeColor="yellow"
       />
 
-      <div className="relative pl-6 md:pl-8 border-l-4 border-[#111111] dark:border-[#F7F7F2] space-y-8">
+      <div className="relative pl-6 md:pl-8 border-l-4 border-[#111111] dark:border-[#77756F] space-y-8">
         {/* Animated timeline bar progress */}
         <motion.div
           className="absolute left-[-4px] top-0 w-1 bg-[#FFD600]"
@@ -36,19 +36,19 @@ export default function BuildLog() {
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.45, delay: index * 0.12, ease: "easeOut" }}
               whileHover={{ y: -4 }}
-              className="relative bg-white dark:bg-[#1A1A1A] border-3 border-[#111111] dark:border-[#F7F7F2] rounded-2xl p-6 md:p-8 brutal-shadow-md hover:shadow-[10px_10px_0px_var(--shadow)] flex flex-col justify-between transition-colors"
+              className="relative bg-white dark:bg-[#222222] border-3 border-[#111111] dark:border-[#77756F] rounded-2xl p-6 md:p-8 brutal-shadow-md hover:shadow-[10px_10px_0px_var(--shadow)] flex flex-col justify-between transition-colors"
             >
               {/* Timeline Node Point */}
               <div className="absolute -left-[35px] md:-left-[43px] top-8 w-4 h-4 bg-[#FFD600] border-3 border-[#111111] rounded-full brutal-shadow-sm" />
 
               {/* Receipt Header Bar */}
               <div>
-                <div className="flex items-center justify-between border-b-2 border-dashed border-[#111111] dark:border-[#F7F7F2] pb-4 mb-4">
-                  <div className="flex items-center gap-2 font-mono text-sm font-black text-[#111111] dark:text-[#F7F7F2]">
-                    <Terminal className="w-4 h-4 text-[#635BFF] dark:text-[#FFD600] stroke-[2.5]" />
+                <div className="flex items-center justify-between border-b-2 border-dashed border-[#111111] dark:border-[#77756F] pb-4 mb-4">
+                  <div className="flex items-center gap-2 font-mono text-sm font-black text-[#111111] dark:text-[#E8E6DF]">
+                    <Terminal className="w-4 h-4 text-[#635BFF] dark:text-[#E8C400] stroke-[2.5]" />
                     <span>{log.logNumber}</span>
                   </div>
-                  <span className="font-mono text-xs font-bold text-[#111111]/60 dark:text-[#F7F7F2]/60">
+                  <span className="font-mono text-xs font-bold text-[#111111]/60 dark:text-[#9F9D96]">
                     [{log.date}]
                   </span>
                 </div>
@@ -56,28 +56,28 @@ export default function BuildLog() {
                 {/* Log Details */}
                 <div className="space-y-3 mb-6">
                   <div>
-                    <span className="font-mono text-xs text-[#111111]/60 dark:text-[#F7F7F2]/60 font-bold block uppercase">
+                    <span className="font-mono text-xs text-[#111111]/60 dark:text-[#9F9D96] font-bold block uppercase">
                       PROJECT
                     </span>
-                    <h4 className="text-2xl font-black text-[#111111] dark:text-[#F7F7F2] uppercase">
+                    <h4 className="text-2xl font-black text-[#111111] dark:text-[#E8E6DF] uppercase">
                       {log.project}
                     </h4>
                   </div>
 
                   <div>
-                    <span className="font-mono text-xs text-[#635BFF] dark:text-[#FFD600] font-bold block uppercase">
+                    <span className="font-mono text-xs text-[#635BFF] dark:text-[#E8C400] font-bold block uppercase">
                       ROLE
                     </span>
-                    <p className="font-bold text-sm text-[#111111] dark:text-[#F7F7F2]">
+                    <p className="font-bold text-sm text-[#111111] dark:text-[#E8E6DF]">
                       {log.role}
                     </p>
                   </div>
 
                   <div>
-                    <span className="font-mono text-xs text-[#111111]/60 dark:text-[#F7F7F2]/60 font-bold block uppercase">
+                    <span className="font-mono text-xs text-[#111111]/60 dark:text-[#9F9D96] font-bold block uppercase">
                       SUMMARY
                     </span>
-                    <p className="text-sm font-medium text-[#111111]/90 dark:text-[#F7F7F2]/90 leading-relaxed">
+                    <p className="text-sm font-medium text-[#111111]/90 dark:text-[#B8B6AE] leading-relaxed">
                       {log.summary}
                     </p>
                   </div>
@@ -97,9 +97,9 @@ export default function BuildLog() {
                   ))}
                 </div>
 
-                <div className="pt-3 border-t-2 border-[#111111] dark:border-[#F7F7F2] flex items-center justify-between text-xs font-mono font-bold text-[#111111] dark:text-[#F7F7F2]">
+                <div className="pt-3 border-t-2 border-[#111111] dark:border-[#77756F] flex items-center justify-between text-xs font-mono font-bold text-[#111111] dark:text-[#E8E6DF]">
                   <span className="flex items-center gap-1.5">
-                    <CheckCircle2 className="w-4 h-4 text-[#635BFF] dark:text-[#FFD600] stroke-[2.5]" />
+                    <CheckCircle2 className="w-4 h-4 text-[#635BFF] dark:text-[#E8C400] stroke-[2.5]" />
                     LOGGED & VERIFIED
                   </span>
                   <span>ID: {log.id}</span>

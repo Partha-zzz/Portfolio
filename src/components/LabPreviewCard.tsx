@@ -68,7 +68,7 @@ export default function LabPreviewCard({ item }: LabPreviewCardProps) {
         {/* VIEW EXPERIMENT → CTA */}
         <div className="pt-4 border-t-2 border-[#111111] dark:border-[#77756F] flex items-center justify-between">
           <Link
-            href="/lab"
+            href={`/lab/${item.slug || item.id}`}
             className="inline-flex items-center gap-1.5 font-mono text-xs font-black text-[#111111] dark:text-[#E8E6DF] hover:text-[#635BFF] dark:hover:text-[#E8C400] group transition-colors"
           >
             <span>VIEW EXPERIMENT</span>

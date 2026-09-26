@@ -10,6 +10,16 @@ export interface BuildLogEntry {
 
 export const BUILD_LOGS: BuildLogEntry[] = [
   {
+    id: "mnist-neural-network-experiment",
+    logNumber: "BUILD LOG #004",
+    date: "2026-09-27",
+    project: "MNIST NEURAL NETWORK EXPERIMENT",
+    role: "ML / Deep Learning",
+    stack: ["Python", "TensorFlow", "Keras", "MNIST"],
+    summary:
+      "Compared three neural-network architectures on MNIST and observed that all three achieved similar test performance, with small differences changing between training runs.",
+  },
+  {
     id: "california-housing-predictor",
     logNumber: "BUILD LOG #001",
     date: "RECENT",
@@ -30,18 +40,8 @@ export const BUILD_LOGS: BuildLogEntry[] = [
       "Built a Python web scraper using Requests and BeautifulSoup to extract job titles, company names, locations, and job URLs and export the results into CSV.",
   },
   {
-    id: "bharatfarm",
-    logNumber: "BUILD LOG #003",
-    date: "RECENT",
-    project: "BHARATFARM",
-    role: "Lead Frontend Developer / UI Design",
-    stack: ["React", "TypeScript", "Node.js", "Supabase", "AI"],
-    summary:
-      "Built and contributed to a full-stack smart agriculture platform combining farmer-focused tools, AI-assisted intelligence, marketplace workflows, weather/advisory features, disease scanning, and offline/PWA capabilities.",
-  },
-  {
     id: "data-analytics-projects",
-    logNumber: "BUILD LOG #004",
+    logNumber: "BUILD LOG #003",
     date: "RECENT",
     project: "DATA ANALYTICS PROJECTS",
     role: "Data Analyst",

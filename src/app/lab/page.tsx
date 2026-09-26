@@ -59,8 +59,8 @@ export default function LabPage() {
         </div>
       </div>
 
-      {/* Lab Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      {/* Lab Grid — 2 columns on desktop for clean 2x2 archive layout */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
         {filteredItems.map((item) => (
           <LabCard key={item.id} item={item} />
         ))}

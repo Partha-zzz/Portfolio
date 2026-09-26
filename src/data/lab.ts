@@ -399,4 +399,137 @@ for job_element in job_elements:
       note: "Educational scraping target for practicing web extraction",
     },
   },
+  {
+    id: "mnist-neural-network-experiment",
+    slug: "mnist-neural-network-experiment",
+    number: "EXP-04",
+    title: "MNIST NEURAL NETWORK EXPERIMENT",
+    category: "MACHINE LEARNING / DEEP LEARNING",
+    description:
+      "An experiment comparing three neural-network architectures on MNIST to understand how increasing hidden-layer depth affects test performance and generalization.",
+    technologies: ["Python", "TensorFlow", "Keras", "Matplotlib"],
+    status: "COMPLETED EXPERIMENT",
+    statusColor: "#635BFF",
+    githubUrl: "https://github.com/Partha-zzz",
+    snippet: `import tensorflow as tf
+from tensorflow.keras import layers, models
+
+# MNIST input: 28x28 grayscale images flattened to 784 input values
+# Comparing 1, 2, and 3 dense hidden layer architectures:
+model_1 = models.Sequential([
+    layers.Flatten(input_shape=(28, 28)), # 784
+    layers.Dense(128, activation='relu'),
+    layers.Dense(10, activation='softmax')
+])
+
+model_2 = models.Sequential([
+    layers.Flatten(input_shape=(28, 28)), # 784
+    layers.Dense(128, activation='relu'),
+    layers.Dense(64, activation='relu'),
+    layers.Dense(10, activation='softmax')
+])
+
+model_3 = models.Sequential([
+    layers.Flatten(input_shape=(28, 28)), # 784
+    layers.Dense(128, activation='relu'),
+    layers.Dense(64, activation='relu'),
+    layers.Dense(32, activation='relu'),
+    layers.Dense(10, activation='softmax')
+])`,
+    updatedAt: "2026-09-27",
+    whyInLab:
+      "This experiment was conducted to explore neural network depth, evaluate generalization on unseen test data, and understand how training randomness impacts model evaluation on MNIST.",
+    sections: [
+      {
+        id: "mnist-01",
+        number: "01",
+        title: "THE PROBLEM",
+        type: "text",
+        content:
+          "Explore whether adding more hidden Dense layers improves MNIST handwritten-digit classification performance.",
+      },
+      {
+        id: "mnist-02",
+        number: "02",
+        title: "THE DATA",
+        type: "key-value",
+        keyValueItems: [
+          { title: "DATASET", desc: "MNIST handwritten-digit dataset" },
+          { title: "INPUT", desc: "28 × 28 grayscale images (flattened to 784 input values)" },
+          { title: "TRAINING DATA", desc: "60,000 images" },
+          { title: "TEST DATA", desc: "10,000 images" },
+        ],
+      },
+      {
+        id: "mnist-03",
+        number: "03",
+        title: "MODEL ARCHITECTURES",
+        type: "key-value",
+        keyValueItems: [
+          { title: "MODEL 1 (1 HIDDEN LAYER)", desc: "INPUT 784 → 128 (ReLU) → OUTPUT 10 (Softmax)" },
+          { title: "MODEL 2 (2 HIDDEN LAYERS)", desc: "INPUT 784 → 128 (ReLU) → 64 (ReLU) → OUTPUT 10 (Softmax)" },
+          { title: "MODEL 3 (3 HIDDEN LAYERS)", desc: "INPUT 784 → 128 (ReLU) → 64 (ReLU) → 32 (ReLU) → OUTPUT 10 (Softmax)" },
+        ],
+      },
+      {
+        id: "mnist-04",
+        number: "04",
+        title: "EXPERIMENTAL COMPARISON",
+        type: "key-value",
+        keyValueItems: [
+          { title: "MODEL 1 (1 HIDDEN LAYER)", desc: "128 hidden nodes | Test Accuracy: 97.58%" },
+          { title: "MODEL 2 (2 HIDDEN LAYERS)", desc: "128 → 64 hidden nodes | Test Accuracy: 97.69%" },
+          { title: "MODEL 3 (3 HIDDEN LAYERS)", desc: "128 → 64 → 32 hidden nodes | Test Accuracy: 97.68%" },
+        ],
+      },
+      {
+        id: "mnist-05",
+        number: "05",
+        title: "WHAT CHANGED BETWEEN RUNS?",
+        type: "text",
+        content:
+          "In an earlier run, Model 1 performed best. In the rerun, Model 2 (97.69%) and Model 3 (97.68%) performed slightly better than Model 1 (97.58%). This demonstrates that neural-network training contains randomness, including weight initialization and optimization dynamics. All three architectures performed very similarly on MNIST, with test accuracy around 97.6–97.7%. A single run is not enough to declare a universally best architecture.",
+      },
+      {
+        id: "mnist-06",
+        number: "06",
+        title: "WHAT I LEARNED",
+        type: "list",
+        items: [
+          "Adding layers does not automatically improve performance.",
+          "All three architectures achieved approximately 97–98% test accuracy.",
+          "Small differences can change between training runs.",
+          "Test accuracy is more useful for evaluating generalization than training accuracy alone.",
+          "More complex architectures should be justified by experiments, not added simply because they are deeper.",
+        ],
+      },
+      {
+        id: "mnist-07",
+        number: "07",
+        title: "GENERALIZATION",
+        type: "key-value",
+        keyValueItems: [
+          { title: "TRAINING ACCURACY", desc: "~99.38% (Model 2)" },
+          { title: "TEST ACCURACY", desc: "97.69% (Model 2)" },
+          {
+            title: "OBSERVATION",
+            desc: "Training accuracy was higher than test accuracy, illustrating the difference between performance on seen training data and unseen test data.",
+          },
+        ],
+      },
+      {
+        id: "mnist-08",
+        number: "08",
+        title: "NEXT EXPERIMENTS",
+        type: "list",
+        items: [
+          "Run each architecture multiple times to calculate mean test accuracy and standard deviation",
+          "Compare training and validation loss/accuracy curves over epochs",
+          "Experiment with Dropout regularization",
+          "Experiment with different optimizers (e.g. Adam vs SGD) or learning rates",
+          "Compare Dense networks with a Convolutional Neural Network (CNN)",
+        ],
+      },
+    ],
+  },
 ];
