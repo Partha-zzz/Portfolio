@@ -74,7 +74,7 @@ export default function CertificationsPage() {
         number="06"
         title="CERTIFICATE WALL."
         subtitle="A visual archive of verified certifications, courses, participation records, and achievements."
-        badge="14 / VERIFIED CREDENTIALS"
+        badge={`${CREDENTIALS.length} / VERIFIED CREDENTIALS`}
         badgeColor="yellow"
       />
 
