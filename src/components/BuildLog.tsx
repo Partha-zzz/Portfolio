@@ -10,10 +10,10 @@ export default function BuildLog() {
   return (
     <section id="timeline" className="my-16 md:my-24 scroll-mt-24">
       <SectionHeading
-        number="05"
+        number="06"
         title="BUILD LOG."
         subtitle="Receipt & logbook records of real code milestones, ML pipelines, and project releases."
-        badge="05 TIMELINE"
+        badge="06 TIMELINE"
         badgeColor="yellow"
       />
 

@@ -148,7 +148,7 @@ export default function Home() {
       {/* ================= THE LAB PREVIEW ================= */}
       <section id="lab" className="scroll-mt-24">
         <SectionHeading
-          number="04"
+          number="05"
           title="THE LAB."
           subtitle="NOT EVERYTHING NEEDS TO BE A PRODUCT. Experiments, learning projects, and active prototypes."
           badge="EXPERIMENTS"

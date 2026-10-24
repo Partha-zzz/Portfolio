@@ -22,9 +22,9 @@ export default function FeaturedCredentials() {
   const [activeCredential, setActiveCredential] = React.useState<Credential | null>(null);
 
   return (
-    <section id="featured-credentials" className="scroll-mt-24">
+    <section id="credentials" className="scroll-mt-24">
       <SectionHeading
-        number="03"
+        number="04"
         title="FEATURED CREDENTIALS."
         subtitle="A compact preview of verified credentials from the full Certifications archive."
         badge="CERTIFICATE PREVIEW"

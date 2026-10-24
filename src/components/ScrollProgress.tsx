@@ -8,9 +8,10 @@ const SECTIONS = [
   { id: "work", label: "01 WORK", number: "01" },
   { id: "workflow", label: "02 WORKFLOW", number: "02" },
   { id: "skills", label: "03 SKILLS", number: "03" },
-  { id: "lab", label: "04 THE LAB", number: "04" },
-  { id: "timeline", label: "05 BUILD LOG", number: "05" },
-  { id: "contact", label: "06 CONTACT", number: "06" },
+  { id: "credentials", label: "04 CREDENTIALS", number: "04" },
+  { id: "lab", label: "05 THE LAB", number: "05" },
+  { id: "timeline", label: "06 BUILD LOG", number: "06" },
+  { id: "contact", label: "07 CONTACT", number: "07" },
 ];
 
 export default function ScrollProgress() {
