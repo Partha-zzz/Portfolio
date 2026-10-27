@@ -96,6 +96,33 @@ function LabHighlight({ item }: { item: LabItem }) {
     );
   }
 
+  if (item.id === "papertrail") {
+    return (
+      <div className="bg-[#F7F7F2] dark:bg-[#272727] border-2 border-[#111111] dark:border-[#77756F] p-3.5 rounded-xl font-mono text-xs">
+        <div className="flex items-center justify-between mb-2">
+          <span className="font-black text-[#635BFF] dark:text-[#E8C400] uppercase tracking-wider">
+            RAG PIPELINE FLOW
+          </span>
+          <span className="font-extrabold text-[#111111] dark:text-[#181818] bg-[#FFD600] dark:bg-[#E8C400] px-2 py-0.5 rounded text-[10px] border border-[#111111]">
+            [PAGE X] CITATIONS
+          </span>
+        </div>
+        <div className="flex flex-wrap items-center gap-1 font-bold text-[10px]">
+          {["PDF", "CHUNKS", "EMBEDDINGS", "NUMPY COSINE", "GROQ LLM"].map((step, idx, arr) => (
+            <React.Fragment key={step}>
+              <span className="bg-white dark:bg-[#222222] text-[#111111] dark:text-[#E8E6DF] px-1.5 py-0.5 rounded border border-[#111111] dark:border-[#77756F] shadow-[1px_1px_0px_var(--shadow)]">
+                {step}
+              </span>
+              {idx < arr.length - 1 && (
+                <span className="text-[#635BFF] dark:text-[#E8C400] font-black">→</span>
+              )}
+            </React.Fragment>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return null;
 }
 

@@ -532,4 +532,171 @@ model_3 = models.Sequential([
       },
     ],
   },
+  {
+    id: "papertrail",
+    slug: "papertrail",
+    number: "EXP-05",
+    title: "PAPERTRAIL",
+    category: "AI / RAG / NLP",
+    description:
+      "A beginner-friendly Retrieval-Augmented Generation (RAG) research assistant that lets users upload a PDF paper, ask questions in natural language, and receive answers grounded in retrieved passages with page-number citations.",
+    technologies: [
+      "Python",
+      "Streamlit",
+      "pypdf",
+      "Sentence Transformers",
+      "all-MiniLM-L6-v2",
+      "NumPy",
+      "Groq API",
+      "python-dotenv",
+    ],
+    status: "COMPLETED EXPERIMENT",
+    statusColor: "#635BFF",
+    githubUrl: "https://github.com/Partha-zzz/Papertrail",
+    snippet: `# Core RAG pipeline: sliding-window chunking, local embeddings & NumPy cosine ranking
+from sentence_transformers import SentenceTransformer
+import numpy as np
+from groq import Groq
+
+# 1. Local normalized embeddings with all-MiniLM-L6-v2
+embedder = SentenceTransformer("all-MiniLM-L6-v2")
+chunk_embeddings = embedder.encode(chunks, normalize_embeddings=True)
+
+# 2. Similarity search using pure NumPy dot product (cosine similarity)
+query_embedding = embedder.encode([query], normalize_embeddings=True)[0]
+similarities = np.dot(chunk_embeddings, query_embedding)
+top_k_indices = np.argsort(similarities)[::-1][:3]
+
+# 3. Grounded context generation with [Page X] citations passed to Groq API
+context_blocks = [f"[Page {chunk['page']}] {chunk['text']}" for chunk in retrieved_chunks]`,
+    updatedAt: "2026-10-27",
+    whyInLab:
+      "PaperTrail implements an end-to-end RAG architecture in transparent, vanilla Python without orchestrator frameworks (no LangChain or LlamaIndex) or external vector DBs, making retrieval mechanics, chunk overlap, and similarity scoring completely inspectable.",
+    sections: [
+      {
+        id: "papertrail-01",
+        number: "01",
+        title: "THE PROBLEM",
+        type: "text",
+        content:
+          "Finding specific information inside research papers can be time-consuming. Generic LLM answers may also include claims that are not supported by the uploaded document.",
+      },
+      {
+        id: "papertrail-02",
+        number: "02",
+        title: "THE APPROACH",
+        type: "text",
+        content:
+          "PaperTrail implements the RAG pipeline directly in Python, without LangChain, LlamaIndex, or an external vector database. This makes the retrieval process easier to inspect, calibrate, and understand.",
+      },
+      {
+        id: "papertrail-03",
+        number: "03",
+        title: "RAG PIPELINE",
+        type: "badge-flow",
+        items: [
+          "PDF UPLOAD",
+          "TEXT EXTRACTION",
+          "CHUNKING",
+          "EMBEDDINGS",
+          "SIMILARITY SEARCH",
+          "GROQ LLM",
+          "CITED ANSWER",
+        ],
+      },
+      {
+        id: "papertrail-04",
+        number: "04",
+        title: "RETRIEVAL & SIMILARITY",
+        type: "key-value",
+        keyValueItems: [
+          {
+            title: "1. PDF EXTRACTION",
+            desc: "pypdf extracts text page by page while preserving page numbers for citation tracking.",
+          },
+          {
+            title: "2. TEXT CHUNKING",
+            desc: "A sliding window splits text into chunks of 1,000 characters with 150 characters of overlap.",
+          },
+          {
+            title: "3. EMBEDDING GENERATION",
+            desc: "sentence-transformers uses all-MiniLM-L6-v2 locally to produce normalized dense embeddings.",
+          },
+          {
+            title: "4. SIMILARITY SEARCH",
+            desc: "NumPy dot products rank chunks by cosine similarity without relying on external vector databases.",
+          },
+          {
+            title: "5. RETRIEVAL",
+            desc: "The top three relevant chunks are selected along with their page numbers and similarity scores.",
+          },
+          {
+            title: "6. ANSWER GENERATION",
+            desc: "The Groq API generates a synthesized answer using strictly the retrieved evidence.",
+          },
+        ],
+      },
+      {
+        id: "papertrail-05",
+        number: "05",
+        title: "GROUNDED ANSWERS",
+        type: "text",
+        content:
+          "Answers reference source pages using explicit [Page X] citations. When retrieved evidence is insufficient to answer the query, the system provides an explicit fallback rather than hallucinating unsupported facts.",
+      },
+      {
+        id: "papertrail-06",
+        number: "06",
+        title: "DESIGN DECISIONS",
+        type: "list",
+        items: [
+          "No LangChain or LlamaIndex — built with direct Python control flow to keep operations transparent.",
+          "No external vector database — embeddings stored in memory for zero-dependency local runs.",
+          "Local embedding generation using all-MiniLM-L6-v2 for fast, private, offline vectorization.",
+          "Transparent NumPy similarity calculations directly exposing cosine similarity scores.",
+          "Inspectable retrieved text, page numbers, and similarity scores visible to the user.",
+          "Explicit fallback prompt contract when the retrieved evidence is insufficient.",
+        ],
+      },
+      {
+        id: "papertrail-07",
+        number: "07",
+        title: "LIMITATIONS",
+        type: "list",
+        items: [
+          "Image-only or scanned PDFs without extractable text are not supported by the current text-extraction pipeline.",
+          "Retrieval is based on the top three chunks ranked by embedding similarity.",
+          "Answer quality depends on the extracted text, retrieval relevance, and selected LLM.",
+          "Embeddings are kept in application session state; this is not a persistent document-indexing service.",
+          "The current implementation does not establish benchmarked retrieval or answer accuracy.",
+        ],
+      },
+      {
+        id: "papertrail-08",
+        number: "08",
+        title: "WHAT I LEARNED",
+        type: "list",
+        items: [
+          "How chunk size and sliding-window overlap directly impact semantic preservation across boundaries.",
+          "The mechanics of cosine similarity calculation via normalized vector dot products with NumPy.",
+          "Structuring prompt context to enforce strict document grounding and page citation compliance.",
+          "The trade-offs between orchestrator frameworks (LangChain) and transparent, minimal implementations.",
+          "Handling edge cases like zero-text PDFs, query drift, and graceful fallback when similarity is low.",
+        ],
+      },
+      {
+        id: "papertrail-09",
+        number: "09",
+        title: "NEXT EXPERIMENTS",
+        type: "list",
+        items: [
+          "Support scanned PDFs through OCR (e.g. pytesseract or pdf2image).",
+          "Compare chunk sizes and overlap settings systematically.",
+          "Evaluate retrieval quality with a small question-and-answer test set.",
+          "Experiment with reranking retrieved chunks using cross-encoders.",
+          "Add conversation history or persistent document indexing.",
+        ],
+      },
+    ],
+  },
 ];
