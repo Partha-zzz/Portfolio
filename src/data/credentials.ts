@@ -67,6 +67,22 @@ export const CREDENTIALS: Credential[] = [
 
   // SECTION 02 — HACKATHONS & COMPETITIONS
   {
+    id: "nasa-space-apps-2026",
+    title: "NASA Space Apps Challenge 2026 — 2nd Runner-Up",
+    organization: "NASA Space Apps Challenge Haldia",
+    date: "15 November 2026",
+    type: "AWARD",
+    category: "DEVELOPMENT",
+    description: "Recognized as a 2nd Runner-Up for our collaborative project, \"The Tale of NASA's Forgotten Legacy\", at the NASA Space Apps Challenge 2026 Haldia event.",
+    badge: "2ND RUNNER-UP | THIRD PLACE",
+    image: "/certifications/nasa-space-apps-2026.jpg",
+    svgBg: "#0B3D91",
+    accentColor: "#FFD600",
+    rotation: "-rotate-1",
+    priority: 1,
+    sectionId: "02",
+  },
+  {
     id: "ideatex-session-zero-2026",
     title: "Ideatex — Session Zero 2026",
     organization: "Google Developer Group on Campus, Heritage Institute of Technology",

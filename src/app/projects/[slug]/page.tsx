@@ -28,8 +28,13 @@ import {
   BarChart2,
   Filter,
   FileSpreadsheet,
+  Trophy,
+  Rocket,
+  Compass,
+  Award,
 } from "lucide-react";
 import InteractiveMLPipeline from "@/components/InteractiveMLPipeline";
+import ProjectScreenshotGallery from "@/components/ProjectScreenshotGallery";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -64,6 +69,7 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
   const isIPLMind = project.slug === "iplmind";
   const isDataAnalytics = project.slug === "data-analytics";
   const isCaliforniaHousing = project.slug === "california-housing-predictor";
+  const isNasaSpaceApps = project.slug === "nasas-forgotten-legacy";
 
   return (
     <article className="space-y-12 py-6">
@@ -87,6 +93,20 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
           <span className="font-mono text-xs md:text-sm font-black bg-[#FFD600] text-[#111111] px-3 py-1 border-2 border-[#111111] dark:border-[#F7F7F2] rounded uppercase">
             {project.category}
           </span>
+          {isNasaSpaceApps && (
+            <>
+              <span className="font-mono text-xs md:text-sm font-black bg-[#FFD600] text-[#111111] px-3 py-1 border-2 border-[#111111] dark:border-[#F7F7F2] rounded uppercase flex items-center gap-1.5">
+                <span>🏆</span>
+                <span>2ND RUNNER-UP | THIRD PLACE</span>
+              </span>
+              <span className="font-mono text-xs md:text-sm font-black bg-[#635BFF] text-white px-3 py-1 border-2 border-[#111111] dark:border-[#F7F7F2] rounded uppercase">
+                NASA SPACE APPS CHALLENGE 2026
+              </span>
+              <span className="font-mono text-xs md:text-sm font-black bg-[#111111] dark:bg-[#F7F7F2] text-[#FFD600] dark:text-[#111111] px-3 py-1 border border-[#111111] rounded uppercase">
+                36-HOUR HACKATHON
+              </span>
+            </>
+          )}
           {isIPLMind && (
             <span className="font-mono text-xs font-black bg-[#635BFF] text-white px-3 py-1 border-2 border-[#111111] dark:border-[#F7F7F2] rounded uppercase">
               AI × CRICKET × INFERENCE
@@ -121,46 +141,53 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2">
           <div className="bg-white dark:bg-[#1A1A1A] border-2 border-[#111111] dark:border-[#F7F7F2] p-4 rounded-xl brutal-shadow-sm">
             <span className="block font-mono text-xs font-black text-[#635BFF] dark:text-[#FFD600] uppercase mb-1">
-              TYPE
+              {isNasaSpaceApps ? "EVENT" : "TYPE"}
             </span>
             <span className="font-mono text-xs font-extrabold text-[#111111] dark:text-[#F7F7F2]">
-              {project.type || "Software Project"}
+              {isNasaSpaceApps ? project.event || "NASA Space Apps Challenge 2026" : project.type || "Software Project"}
             </span>
           </div>
           <div className="bg-white dark:bg-[#1A1A1A] border-2 border-[#111111] dark:border-[#F7F7F2] p-4 rounded-xl brutal-shadow-sm">
             <span className="block font-mono text-xs font-black text-[#635BFF] dark:text-[#FFD600] uppercase mb-1">
-              DOMAIN
+              {isNasaSpaceApps ? "LOCATION" : "DOMAIN"}
             </span>
             <span className="font-mono text-xs font-extrabold text-[#111111] dark:text-[#F7F7F2]">
-              {project.domain || project.category}
+              {isNasaSpaceApps ? project.location || "Haldia, West Bengal, India" : project.domain || project.category}
             </span>
           </div>
           <div className="bg-white dark:bg-[#1A1A1A] border-2 border-[#111111] dark:border-[#F7F7F2] p-4 rounded-xl brutal-shadow-sm">
             <span className="block font-mono text-xs font-black text-[#635BFF] dark:text-[#FFD600] uppercase mb-1">
-              ARCHITECTURE
+              {isNasaSpaceApps ? "DURATION" : "ARCHITECTURE"}
             </span>
             <span className="font-mono text-xs font-extrabold text-[#111111] dark:text-[#F7F7F2]">
-              {project.architecture || "Full-Stack"}
+              {isNasaSpaceApps ? project.duration || "36-Hour Hackathon" : project.architecture || "Full-Stack"}
             </span>
           </div>
           <div className="bg-white dark:bg-[#1A1A1A] border-2 border-[#111111] dark:border-[#F7F7F2] p-4 rounded-xl brutal-shadow-sm">
             <span className="block font-mono text-xs font-black text-[#635BFF] dark:text-[#FFD600] uppercase mb-1">
-              TEAM / ROLE
+              {isNasaSpaceApps ? "ACHIEVEMENT" : "TEAM / ROLE"}
             </span>
             <span className="font-mono text-xs font-extrabold text-[#111111] dark:text-[#F7F7F2]">
-              {project.role || "Lead Developer"}
+              {isNasaSpaceApps ? project.achievement || "2nd Runner-Up (3rd Place)" : project.role || "Lead Developer"}
             </span>
           </div>
         </div>
 
         {/* Action Links */}
         <div className="flex flex-wrap items-center gap-4 pt-2">
-          <BrutalButton href={project.github} variant="purple" size="md" external icon>
-            GITHUB ↗
-          </BrutalButton>
           {project.demo && (
-            <BrutalButton href={project.demo} variant="yellow" size="md" external icon>
-              LIVE DEMO ↗
+            <BrutalButton href={project.demo} variant="yellow" size={isNasaSpaceApps ? "lg" : "md"} external icon>
+              {isNasaSpaceApps ? "VISIT LIVE WEBSITE ↗" : "LIVE DEMO ↗"}
+            </BrutalButton>
+          )}
+          {project.github && (
+            <BrutalButton href={project.github} variant="purple" size="md" external icon>
+              GITHUB ↗
+            </BrutalButton>
+          )}
+          {isNasaSpaceApps && (
+            <BrutalButton href="/certifications" variant="white" size="lg" icon>
+              VIEW AWARD CERTIFICATE ➔
             </BrutalButton>
           )}
         </div>
@@ -175,7 +202,9 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
 
         <div className="relative z-10 flex justify-between items-start gap-4">
           <span className="font-mono text-xs font-black bg-white text-[#111111] px-3 py-1 border-2 border-[#111111] rounded brutal-shadow-sm">
-            {isIPLMind
+            {isNasaSpaceApps
+              ? "NASA SPACE APPS CHALLENGE 2026 — 2ND RUNNER-UP"
+              : isIPLMind
               ? "HYBRID REASONING & INFERENCE ENGINE"
               : isResQAI
               ? "CRISIS INTELLIGENCE PLATFORM"
@@ -194,7 +223,9 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
 
         <div className="relative z-10 my-8 text-center space-y-4">
           <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-[#111111] bg-white px-6 py-4 border-3 border-[#111111] rounded-2xl brutal-shadow-md inline-block uppercase tracking-tight">
-            {isIPLMind
+            {isNasaSpaceApps
+              ? '"THE TALE OF NASA\'S FORGOTTEN LEGACY"'
+              : isIPLMind
               ? '"THE IPLMIND THAT TRIES TO READ YOUR MIND."'
               : isDataAnalytics
               ? "DATA ANALYTICS PROJECTS"
@@ -202,7 +233,9 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
           </h2>
           <div>
             <p className="font-mono text-xs md:text-sm font-extrabold text-[#111111] bg-[#FFD600] inline-block px-4 py-1.5 border-2 border-[#111111] rounded-lg uppercase">
-              {isIPLMind
+              {isNasaSpaceApps
+                ? "36-HOUR HACKATHON · INTERACTIVE 3D · HISTORICAL LUNAR & MARTIAN EQUIPMENT · AI NARRATION"
+                : isIPLMind
                 ? "DETERMINISTIC FILTERING × BAYESIAN PROBABILITY × GEMINI ADAPTIVE AI"
                 : isResQAI
                 ? "REAL-TIME CRISIS COORDINATION & AI MAP ANALYSIS"
@@ -1190,6 +1223,326 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
               <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
                 <BrutalButton href={project.github} variant="black" size="lg" external icon>
                   VIEW REPOSITORY ↗
+                </BrutalButton>
+              </div>
+            </section>
+          </>
+        ) : isNasaSpaceApps ? (
+          <>
+            {/* 00 — PROMINENT ACHIEVEMENT BADGE & TEAM HIGHLIGHT BANNER */}
+            <section className="bg-gradient-to-br from-[#FFD600] to-[#FFC700] text-[#111111] border-4 border-[#111111] rounded-3xl p-6 sm:p-10 brutal-shadow-lg relative overflow-hidden space-y-6">
+              <div className="absolute top-3 right-4 font-mono text-[10px] sm:text-xs font-black uppercase tracking-widest px-3 py-1 bg-[#111111] text-[#FFD600] rounded-md shadow-sm">
+                COLLABORATIVE TEAM PROJECT
+              </div>
+
+              <div className="space-y-3">
+                <div className="inline-flex items-center gap-2 bg-[#111111] text-white px-3.5 py-1.5 rounded-lg font-mono text-xs font-black uppercase tracking-wider brutal-shadow-sm">
+                  <Trophy className="w-4 h-4 text-[#FFD600]" />
+                  <span>NASA SPACE APPS CHALLENGE 2026</span>
+                </div>
+                <h2 className="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight leading-none">
+                  2ND RUNNER-UP | THIRD PLACE
+                </h2>
+                <p className="font-mono text-xs sm:text-sm font-extrabold uppercase tracking-wide text-[#111111]/90">
+                  HALDIA, WEST BENGAL, INDIA • 36-HOUR HACKATHON COLLABORATION
+                </p>
+                <p className="text-sm sm:text-base font-bold text-[#111111]/90 max-w-3xl leading-relaxed pt-1">
+                  Built collaboratively during an intensive 36-hour sprint at NASA Space Apps Challenge 2026, Haldia. Our team engineered an interactive, cinematic 3D storytelling experience that took 3rd place overall.
+                </p>
+              </div>
+
+              {/* Verified Key Metrics Grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 pt-2">
+                <div className="bg-white border-2 border-[#111111] rounded-xl p-4 brutal-shadow-sm text-center">
+                  <span className="block font-extrabold text-2xl sm:text-3xl text-[#111111]">36H</span>
+                  <span className="font-mono text-[10px] sm:text-xs font-black uppercase text-[#111111]/70">HACKATHON SPRINT</span>
+                </div>
+                <div className="bg-white border-2 border-[#111111] rounded-xl p-4 brutal-shadow-sm text-center">
+                  <span className="block font-extrabold text-2xl sm:text-3xl text-[#635BFF]">3RD</span>
+                  <span className="font-mono text-[10px] sm:text-xs font-black uppercase text-[#111111]/70">2ND RUNNER-UP</span>
+                </div>
+                <div className="bg-white border-2 border-[#111111] rounded-xl p-4 brutal-shadow-sm text-center">
+                  <span className="block font-extrabold text-2xl sm:text-3xl text-[#111111]">MOON & MARS</span>
+                  <span className="font-mono text-[10px] sm:text-xs font-black uppercase text-[#111111]/70">+ KEPLER SEGMENT</span>
+                </div>
+                <div className="bg-white border-2 border-[#111111] rounded-xl p-4 brutal-shadow-sm text-center">
+                  <span className="block font-extrabold text-2xl sm:text-3xl text-[#111111]">TEAM</span>
+                  <span className="font-mono text-[10px] sm:text-xs font-black uppercase text-[#111111]/70">COLLABORATION</span>
+                </div>
+              </div>
+
+              <div className="pt-2 flex flex-wrap items-center gap-3">
+                {project.demo && (
+                  <BrutalButton href={project.demo} variant="black" size="md" external icon>
+                    VISIT LIVE WEBSITE ↗
+                  </BrutalButton>
+                )}
+                <BrutalButton href="/certifications" variant="white" size="md" icon>
+                  VIEW OFFICIAL TROPHY & CERTIFICATE ➔
+                </BrutalButton>
+              </div>
+            </section>
+
+            {/* 01 — THE VISION & OVERVIEW */}
+            <section className="bg-white dark:bg-[#1A1A1A] border-3 border-[#111111] dark:border-[#F7F7F2] rounded-2xl p-6 md:p-10 brutal-shadow-md space-y-6">
+              <div className="flex items-center gap-3">
+                <Rocket className="w-6 h-6 text-[#635BFF] dark:text-[#FFD600] stroke-[2.5]" />
+                <h2 className="font-mono text-sm font-black text-[#635BFF] dark:text-[#FFD600] uppercase tracking-wider">
+                  01 — THE VISION & EDUCATIONAL MISSION
+                </h2>
+              </div>
+
+              <h3 className="text-2xl sm:text-4xl font-extrabold text-[#111111] dark:text-[#F7F7F2] uppercase tracking-tight">
+                BRINGING RETIRED SPACE MISSIONS BACK TO LIFE FOR THE NEXT GENERATION
+              </h3>
+
+              <p className="text-base sm:text-lg font-medium text-[#111111]/85 dark:text-[#F7F7F2]/85 leading-relaxed">
+                {project.longDescription}
+              </p>
+
+              <div className="bg-[#F7F7F2] dark:bg-[#242424] border-2 border-[#111111] dark:border-[#F7F7F2] p-5 sm:p-6 rounded-xl space-y-3">
+                <span className="font-mono text-xs font-black uppercase tracking-wider text-[#635BFF] dark:text-[#FFD600] block">
+                  CHALLENGE & PURPOSE
+                </span>
+                <p className="text-sm sm:text-base font-bold text-[#111111] dark:text-[#F7F7F2] leading-relaxed">
+                  {project.problem}
+                </p>
+                <p className="text-sm sm:text-base font-medium text-[#111111]/85 dark:text-[#F7F7F2]/85 leading-relaxed">
+                  {project.idea}
+                </p>
+              </div>
+
+              {/* Key Highlights Grid */}
+              <div className="space-y-3 pt-2">
+                <h4 className="font-mono text-xs font-black uppercase text-[#111111] dark:text-[#F7F7F2] tracking-wider">
+                  KEY HIGHLIGHTS OF THE EXPERIENCE:
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {project.highlights?.map((highlight, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-white dark:bg-[#1A1A1A] border-2 border-[#111111] dark:border-[#F7F7F2] rounded-xl p-4 brutal-shadow-sm flex items-start gap-2.5"
+                    >
+                      <CheckCircle2 className="w-4 h-4 text-[#635BFF] dark:text-[#FFD600] shrink-0 mt-0.5" />
+                      <span className="font-mono text-xs font-bold text-[#111111] dark:text-[#F7F7F2]">
+                        {highlight}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* 02 — INTERACTIVE SCREENSHOT GALLERY (WITH LIGHTBOX) */}
+            <section className="bg-white dark:bg-[#1A1A1A] border-3 border-[#111111] dark:border-[#F7F7F2] rounded-2xl p-6 md:p-10 brutal-shadow-md space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b-2 border-[#111111]/15 dark:border-[#F7F7F2]/20 pb-4">
+                <div className="flex items-center gap-3">
+                  <Compass className="w-6 h-6 text-[#635BFF] dark:text-[#FFD600] stroke-[2.5]" />
+                  <div>
+                    <h2 className="font-mono text-sm font-black text-[#635BFF] dark:text-[#FFD600] uppercase tracking-wider">
+                      02 — INTERACTIVE EXPERIENCE GALLERY
+                    </h2>
+                    <h3 className="text-xl sm:text-2xl font-extrabold text-[#111111] dark:text-[#F7F7F2] uppercase tracking-tight">
+                      ACTUAL WEBSITE SCREENSHOTS & 3D SCENARIOS
+                    </h3>
+                  </div>
+                </div>
+                <span className="font-mono text-xs font-bold bg-[#FFD600] text-[#111111] px-3 py-1 border border-[#111111] rounded uppercase w-fit">
+                  CLICK TO VIEW ENLARGED
+                </span>
+              </div>
+
+              {/* Gallery Component with Lightbox */}
+              {project.screenshots && (
+                <ProjectScreenshotGallery screenshots={project.screenshots} />
+              )}
+            </section>
+
+            {/* 03 — NARRATIVE CHAPTERS */}
+            <section className="bg-white dark:bg-[#1A1A1A] border-3 border-[#111111] dark:border-[#F7F7F2] rounded-2xl p-6 md:p-10 brutal-shadow-md space-y-6">
+              <div className="flex items-center gap-3">
+                <Layers className="w-6 h-6 text-[#635BFF] dark:text-[#FFD600] stroke-[2.5]" />
+                <h2 className="font-mono text-sm font-black text-[#635BFF] dark:text-[#FFD600] uppercase tracking-wider">
+                  03 — NARRATIVE CHAPTERS ACROSS SPACE
+                </h2>
+              </div>
+
+              <h3 className="text-2xl sm:text-4xl font-extrabold text-[#111111] dark:text-[#F7F7F2] uppercase tracking-tight">
+                JOURNEY THROUGH THE MACHINES HUMANITY LEFT BEHIND
+              </h3>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                {/* PROLOGUE — EARTH ORBIT & ISS */}
+                <div className="bg-[#F7F7F2] dark:bg-[#242424] border-2 border-[#111111] dark:border-[#F7F7F2] rounded-xl p-6 brutal-shadow-sm space-y-4 flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <span className="font-mono text-xs font-black px-2.5 py-0.5 bg-[#111111] text-white rounded uppercase inline-block">
+                      PROLOGUE // INTRODUCTORY SEQUENCE
+                    </span>
+                    <h4 className="font-extrabold text-xl sm:text-2xl uppercase text-[#111111] dark:text-[#F7F7F2]">
+                      EARTH ORBIT & ISS
+                    </h4>
+                    <p className="text-xs sm:text-sm font-medium text-[#111111]/85 dark:text-[#F7F7F2]/85 leading-relaxed">
+                      The journey begins in Earth&apos;s orbit, introducing the International Space Station and an astronaut narrator who welcomes younger audiences into the forgotten history of space exploration.
+                    </p>
+                  </div>
+                  <div className="pt-3 border-t border-[#111111]/15 dark:border-[#F7F7F2]/20">
+                    <span className="font-mono text-[11px] font-bold text-[#111111]/60 dark:text-[#F7F7F2]/60 uppercase tracking-wider block">
+                      ROLE: INTRODUCTORY SEQUENCE (NOT CHAPTER 01)
+                    </span>
+                  </div>
+                </div>
+
+                {/* CHAPTER 01 — THE MOON */}
+                <div className="bg-[#F7F7F2] dark:bg-[#242424] border-2 border-[#111111] dark:border-[#F7F7F2] rounded-xl p-6 brutal-shadow-sm space-y-4 flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <span className="font-mono text-xs font-black px-2.5 py-0.5 bg-[#635BFF] text-white rounded uppercase inline-block">
+                      CHAPTER 01 // LUNAR MISSIONS
+                    </span>
+                    <h4 className="font-extrabold text-xl sm:text-2xl uppercase text-[#111111] dark:text-[#F7F7F2]">
+                      THE MOON
+                    </h4>
+                    <p className="text-xs sm:text-sm font-medium text-[#111111]/85 dark:text-[#F7F7F2]/85 leading-relaxed">
+                      Explore NASA&apos;s historic lunar missions and the forgotten equipment left behind on the Moon.
+                    </p>
+                  </div>
+
+                  <div className="space-y-2 pt-3 border-t border-[#111111]/15 dark:border-[#F7F7F2]/20">
+                    <span className="font-mono text-[11px] font-black uppercase text-[#635BFF] dark:text-[#FFD600] tracking-wider block">
+                      FEATURED MISSIONS / EQUIPMENT:
+                    </span>
+                    <ul className="space-y-2 font-mono text-xs text-[#111111] dark:text-[#F7F7F2]">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#635BFF] dark:text-[#FFD600] shrink-0 mt-0.5" />
+                        <span><strong>Apollo 11 Eagle Lunar Module</strong> — humanity&apos;s first crewed lunar landing.</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#635BFF] dark:text-[#FFD600] shrink-0 mt-0.5" />
+                        <span><strong>Apollo 15 Lunar Roving Vehicle</strong> — the vehicle that enabled astronauts to explore a wider area of the lunar surface.</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#635BFF] dark:text-[#FFD600] shrink-0 mt-0.5" />
+                        <span><strong>Surveyor 3</strong> — the robotic lunar lander whose components were later examined by Apollo 12 astronauts.</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* CHAPTER 02 — THE MARS */}
+                <div className="bg-[#F7F7F2] dark:bg-[#242424] border-2 border-[#111111] dark:border-[#F7F7F2] rounded-xl p-6 brutal-shadow-sm space-y-4 flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <span className="font-mono text-xs font-black px-2.5 py-0.5 bg-[#FFD600] text-[#111111] rounded uppercase inline-block border border-[#111111]">
+                      CHAPTER 02 // MARTIAN EXPLORATION
+                    </span>
+                    <h4 className="font-extrabold text-xl sm:text-2xl uppercase text-[#111111] dark:text-[#F7F7F2]">
+                      THE MARS
+                    </h4>
+                    <p className="text-xs sm:text-sm font-medium text-[#111111]/85 dark:text-[#F7F7F2]/85 leading-relaxed">
+                      Discover NASA&apos;s robotic exploration of Mars through the missions and rovers that helped humanity understand the Red Planet.
+                    </p>
+                  </div>
+
+                  <div className="space-y-2 pt-3 border-t border-[#111111]/15 dark:border-[#F7F7F2]/20">
+                    <span className="font-mono text-[11px] font-black uppercase text-[#111111] dark:text-[#FFD600] tracking-wider block">
+                      FEATURED MISSIONS & ROVERS:
+                    </span>
+                    <ul className="space-y-2 font-mono text-xs text-[#111111] dark:text-[#F7F7F2]">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#FFD600] dark:text-[#FFD600] shrink-0 mt-0.5" />
+                        <span>Mars Pathfinder and Sojourner Rover.</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#FFD600] dark:text-[#FFD600] shrink-0 mt-0.5" />
+                        <span>Spirit Rover.</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#FFD600] dark:text-[#FFD600] shrink-0 mt-0.5" />
+                        <span>Opportunity Rover.</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* ADDITIONAL SPACE SEGMENT — KEPLER SPACE TELESCOPE */}
+                <div className="bg-[#F7F7F2] dark:bg-[#242424] border-2 border-[#111111] dark:border-[#F7F7F2] rounded-xl p-6 brutal-shadow-sm space-y-4 flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <span className="font-mono text-xs font-black px-2.5 py-0.5 bg-[#111111] dark:bg-[#F7F7F2] text-[#FFD600] dark:text-[#111111] rounded uppercase inline-block border border-[#111111]">
+                      ADDITIONAL SPACE SEGMENT
+                    </span>
+                    <h4 className="font-extrabold text-xl sm:text-2xl uppercase text-[#111111] dark:text-[#F7F7F2]">
+                      KEPLER SPACE TELESCOPE
+                    </h4>
+                    <p className="text-xs sm:text-sm font-medium text-[#111111]/85 dark:text-[#F7F7F2]/85 leading-relaxed">
+                      Explore the Kepler Space Telescope and its legacy in discovering planets beyond our Solar System.
+                    </p>
+                  </div>
+
+                  <div className="pt-3 border-t border-[#111111]/15 dark:border-[#F7F7F2]/20">
+                    <div className="bg-white dark:bg-[#1A1A1A] border border-[#111111] dark:border-[#F7F7F2] rounded-lg p-3 font-mono text-xs text-[#111111]/80 dark:text-[#F7F7F2]/80">
+                      <strong>NOTE:</strong> Separate space-based storytelling segment exploring exoplanet discovery — not a Mars mission.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* 04 — COLLABORATIVE TEAM EXPERIENCE & LESSONS */}
+            <section className="bg-white dark:bg-[#1A1A1A] border-3 border-[#111111] dark:border-[#F7F7F2] rounded-2xl p-6 md:p-10 brutal-shadow-md space-y-6">
+              <div className="flex items-center gap-3">
+                <Users className="w-6 h-6 text-[#635BFF] dark:text-[#FFD600] stroke-[2.5]" />
+                <h2 className="font-mono text-sm font-black text-[#635BFF] dark:text-[#FFD600] uppercase tracking-wider">
+                  04 — 36-HOUR HACKATHON COLLABORATION
+                </h2>
+              </div>
+
+              <h3 className="text-2xl sm:text-4xl font-extrabold text-[#111111] dark:text-[#F7F7F2] uppercase tracking-tight">
+                SHARED TEAM COLLABORATION & ENGINEERING UNDER SPRINT PRESSURE
+              </h3>
+
+              <div className="space-y-4">
+                <div className="bg-[#F7F7F2] dark:bg-[#242424] border-2 border-[#111111] dark:border-[#F7F7F2] rounded-xl p-5 brutal-shadow-sm">
+                  <span className="font-mono text-xs font-black text-[#635BFF] dark:text-[#FFD600] block mb-1">
+                    TEAM COLLABORATION DYNAMICS
+                  </span>
+                  <p className="text-sm sm:text-base font-medium text-[#111111] dark:text-[#F7F7F2] leading-relaxed">
+                    During 36 non-stop hours at the NASA Space Apps Challenge Haldia event, our team collaborated closely across narrative storyboarding, 3D asset selection and optimization, interactive camera trajectories, and AI narrative scripting. Presenting the final working experience to the evaluation jury culminated in securing 2nd Runner-Up (Third Place).
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {project.lessons.map((lesson, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-[#F7F7F2] dark:bg-[#242424] border-2 border-[#111111] dark:border-[#F7F7F2] rounded-xl p-5 brutal-shadow-sm"
+                    >
+                      <span className="font-mono text-xs font-black text-[#635BFF] dark:text-[#FFD600] block mb-1">
+                        KEY TAKEAWAY #{idx + 1}
+                      </span>
+                      <p className="text-sm font-bold text-[#111111] dark:text-[#F7F7F2] leading-relaxed">
+                        {lesson}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* 05 — VISIT LIVE WEBSITE CTA */}
+            <section className="bg-[#FFD600] text-[#111111] border-3 border-[#111111] dark:border-[#F7F7F2] rounded-2xl p-6 md:p-10 brutal-shadow-md text-center space-y-4">
+              <div className="font-mono text-xs font-black bg-white inline-block px-3 py-1 border border-black rounded uppercase">
+                EXPERIENCE THE LIVE PROJECT
+              </div>
+              <h3 className="text-2xl sm:text-4xl font-extrabold uppercase tracking-tight">
+                VISIT THE TALE OF NASA&apos;S FORGOTTEN LEGACY
+              </h3>
+              <p className="font-mono text-xs sm:text-sm font-bold max-w-xl mx-auto">
+                Explore the interactive 3D narrative directly in your browser. Hosted live on Vercel.
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+                <BrutalButton href={project.demo!} variant="black" size="lg" external icon>
+                  VISIT LIVE WEBSITE ↗
+                </BrutalButton>
+                <BrutalButton href="/certifications" variant="purple" size="lg" icon>
+                  VIEW AWARD IN CERTIFICATIONS ➔
                 </BrutalButton>
               </div>
             </section>

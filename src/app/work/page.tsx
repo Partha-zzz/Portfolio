@@ -23,7 +23,9 @@ export default function WorkPage() {
       project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
       project.technologies.some((tech) =>
         tech.toLowerCase().includes(searchQuery.toLowerCase())
-      );
+      ) ||
+      (project.event && project.event.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (project.achievement && project.achievement.toLowerCase().includes(searchQuery.toLowerCase()));
     return matchesCategory && matchesSearch;
   });
 

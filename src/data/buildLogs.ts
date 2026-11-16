@@ -10,6 +10,16 @@ export interface BuildLogEntry {
 
 export const BUILD_LOGS: BuildLogEntry[] = [
   {
+    id: "nasas-forgotten-legacy",
+    logNumber: "BUILD LOG #005",
+    date: "2026-11-15",
+    project: "THE TALE OF NASA'S FORGOTTEN LEGACY",
+    role: "Collaborative Team Project",
+    stack: ["Three.js", "3D Modeling", "AI Narration", "Interactive Storytelling", "Vercel"],
+    summary:
+      "Built an interactive, cinematic 3D storytelling experience exploring historical lunar and Martian NASA exploration equipment for the NASA Space Apps Challenge 2026, securing 2nd Runner-Up.",
+  },
+  {
     id: "mnist-neural-network-experiment",
     logNumber: "BUILD LOG #004",
     date: "2026-09-27",

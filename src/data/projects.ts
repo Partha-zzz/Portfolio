@@ -8,7 +8,7 @@ export interface Project {
   technologies: string[];
   imageBg: string;
   accentColor: string;
-  github: string;
+  github?: string;
   demo?: string;
   featured: boolean;
   gridCols?: string;
@@ -27,6 +27,21 @@ export interface Project {
   domain?: string;
   architecture?: string;
   team?: string;
+  event?: string;
+  location?: string;
+  duration?: string;
+  achievement?: string;
+  achievementBadge?: {
+    event: string;
+    award: string;
+  };
+  highlights?: string[];
+  image?: string;
+  screenshots?: {
+    src: string;
+    title: string;
+    caption: string;
+  }[];
   tier1Features?: { title: string; desc: string }[];
   tier2Features?: { title: string; desc: string }[];
   whatWeBuilt?: { id: string; title: string; subtitle: string; description: string }[];
@@ -805,6 +820,108 @@ export const PROJECTS: Project[] = [
       "Adaptive AI can handle edge cases that rigid rules struggle with.",
       "Product UX matters even in technically complex inference systems.",
       "Persistent knowledge enrichment creates opportunities for a system to improve over time.",
+    ],
+  },
+  {
+    slug: "nasas-forgotten-legacy",
+    number: "06",
+    title: "THE TALE OF NASA'S FORGOTTEN LEGACY",
+    category: "SPACE TECHNOLOGY / 3D STORYTELLING",
+    classification: "COLLABORATIVE PROJECT",
+    description:
+      "An interactive, cinematic 3D storytelling experience designed to introduce younger audiences to NASA's forgotten and retired space exploration equipment.",
+    longDescription:
+      "An interactive, cinematic 3D storytelling experience designed to introduce younger audiences to NASA's forgotten and retired space exploration equipment. The experience takes visitors on a journey across the Moon and Mars, exploring the stories behind historical NASA equipment through immersive 3D models, cinematic camera movements, narration, and interactive storytelling. The project aims to transform complex space exploration history into an engaging and accessible educational experience.",
+    subheading:
+      "An interactive, cinematic 3D storytelling experience designed to introduce younger audiences to NASA's forgotten and retired space exploration equipment.",
+    role: "Collaborative Team Project",
+    type: "Collaborative Hackathon Project",
+    domain: "Space Technology · Interactive Storytelling",
+    architecture: "Interactive 3D Web Experience × AI-Powered Narration",
+    team: "Collaborative Team Achievement",
+    event: "NASA Space Apps Challenge 2026",
+    location: "Haldia, West Bengal, India",
+    duration: "36-Hour Hackathon",
+    achievement: "2nd Runner-Up — Third Place",
+    achievementBadge: {
+      event: "NASA SPACE APPS CHALLENGE 2026",
+      award: "2ND RUNNER-UP | THIRD PLACE",
+    },
+    technologies: [
+      "Three.js / 3D",
+      "Interactive Storytelling",
+      "AI Narration",
+      "Cinematic Camera",
+      "Web Technologies",
+      "Vercel",
+    ],
+    imageBg: "#0B3D91",
+    accentColor: "#FFD600",
+    image: "/projects/nasa-space-apps/hero.jpg",
+    demo: "https://the-tale-of-nasa-s-forgotten-legacy.vercel.app",
+    featured: true,
+    gridCols: "md:col-span-2 lg:col-span-2",
+
+    problem:
+      "Complex space exploration history and the scientific achievements of retired missions often remain locked in technical archives and dense documentation, making them unengaging and inaccessible for younger students and educational audiences.",
+
+    idea:
+      "Transforming retired NASA missions into an interactive, cinematic 3D storytelling experience. Visitors journey across the Moon and Mars, discovering historical equipment through 3D models, cinematic camera movements, AI-powered narration, and educational milestones.",
+
+    highlights: [
+      "Immersive 3D storytelling experience.",
+      "Interactive exploration of historical lunar and Martian equipment.",
+      "Cinematic scroll-based narrative experience.",
+      "3D models and visual storytelling.",
+      "AI-powered narration.",
+      "Educational storytelling designed for younger audiences.",
+    ],
+
+    screenshots: [
+      {
+        src: "/projects/nasa-space-apps/hero.jpg",
+        title: "The Tale of NASA's Forgotten Legacy",
+        caption: "Orbital perspective showcasing the International Space Station and astronaut narrative introducing the machines humanity left behind.",
+      },
+      {
+        src: "/projects/nasa-space-apps/apollo-11.jpg",
+        title: "Apollo 11 Eagle — Final Approach",
+        caption: "Stage 03 lunar descent visualization detailing the Apollo 11 Lunar Module landing with thruster dynamics and surface dust interaction.",
+      },
+      {
+        src: "/projects/nasa-space-apps/mars.jpg",
+        title: "The Mars — Interplanetary Transit",
+        caption: "Cinematic planetary navigation guiding visitors from lunar orbit toward Mars to explore deep-space exploration milestones.",
+      },
+      {
+        src: "/projects/nasa-space-apps/sojourner.jpg",
+        title: "Sojourner — Mars Pathfinder Rover",
+        caption: "Interactive 3D representation and educational storytelling highlighting the Mars Pathfinder mission and the pioneering Sojourner rover.",
+      },
+    ],
+
+    approach: [
+      "Collaborated as a team during a 36-hour hackathon sprint at NASA Space Apps Challenge 2026, Haldia.",
+      "Structured an engaging narrative framework guiding users from Earth orbit to Lunar and Martian landing sites.",
+      "Integrated 3D equipment models and orchestrated smooth cinematic camera transitions for key mission stages.",
+      "Incorporated AI-assisted narration to make historical space missions accessible to younger audiences.",
+    ],
+
+    implementation:
+      "Engineered during the 36-hour NASA Space Apps Challenge Haldia hackathon. Combines web-based 3D graphics, responsive storytelling layouts, atmospheric audio and narrative sequences, and camera state orchestration. Deployed live to Vercel for jury evaluation and public access.",
+
+    results: [
+      "Secured 2nd Runner-Up (Third Place) at NASA Space Apps Challenge 2026, Haldia in a competitive 36-hour hackathon.",
+      "Delivered a working interactive 3D storytelling platform celebrating historical NASA lunar and Martian missions.",
+      "Designed an accessible educational medium tailored specifically for younger audiences.",
+      "Live deployment actively accessible at https://the-tale-of-nasa-s-forgotten-legacy.vercel.app.",
+    ],
+
+    lessons: [
+      "Team alignment and rapid task parallelization are crucial for delivering complex 3D experiences in a 36-hour sprint.",
+      "Narrative pacing and visual cues make technical historical data dramatically more engaging for learners.",
+      "Optimizing 3D assets and responsive layouts ensures consistent performance across diverse screen sizes.",
+      "Hackathons reward clear mission storytelling combined with a polished, live working product.",
     ],
   },
 ];

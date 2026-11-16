@@ -91,8 +91,13 @@ function HeroSectionContent() {
 }
 
 export default function Home() {
-  // Summary page displays exactly TWO selected projects as preview
-  const selectedProjects = PROJECTS.filter((p) => p.featured).slice(0, 2);
+  // Summary page displays featured projects as preview with NASA Space Apps Challenge prioritized
+  const selectedProjects = [
+    PROJECTS.find((p) => p.slug === "nasas-forgotten-legacy"),
+    ...PROJECTS.filter(
+      (p) => p.featured && p.slug !== "nasas-forgotten-legacy"
+    ),
+  ].filter((p): p is (typeof PROJECTS)[0] => Boolean(p));
   const featuredLabItems = LAB_ITEMS.slice(0, 3);
 
   return (

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import SectionHeading from "@/components/SectionHeading";
 import { CREDENTIALS, Credential } from "@/data/credentials";
 import { Search, Filter, CheckCircle2, X, ShieldCheck } from "lucide-react";
@@ -201,7 +202,7 @@ export default function CertificationsPage() {
                           {/* Certificate Image Frame Container */}
                           <div
                             onClick={() => setActiveCredential(cred)}
-                            className="w-full aspect-[16/10] mb-5 border-3 border-[#111111] dark:border-[#F7F7F2] rounded-xl relative overflow-hidden bg-white dark:bg-[#1A1A1A] transition-transform duration-300 group-hover:scale-[1.01] cursor-pointer"
+                            className="w-full aspect-[4/3] sm:aspect-[16/10] mb-5 border-3 border-[#111111] dark:border-[#F7F7F2] rounded-xl relative overflow-hidden bg-[#0D0D11] dark:bg-[#1A1A1A] transition-transform duration-300 group-hover:scale-[1.01] cursor-pointer flex items-center justify-center p-1"
                           >
                             {/* Actual Certificate JPG Image */}
                             {cred.image ? (
@@ -295,7 +296,7 @@ export default function CertificationsPage() {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative w-full max-w-2xl bg-white dark:bg-[#1A1A1A] border-4 border-[#111111] dark:border-[#F7F7F2] rounded-3xl p-6 sm:p-8 brutal-shadow-lg z-10 space-y-6 text-[#111111] dark:text-[#F7F7F2]"
+              className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-white dark:bg-[#1A1A1A] border-4 border-[#111111] dark:border-[#F7F7F2] rounded-3xl p-6 sm:p-8 brutal-shadow-lg z-10 space-y-6 text-[#111111] dark:text-[#F7F7F2]"
             >
               {/* Close Button */}
               <button
@@ -307,14 +308,15 @@ export default function CertificationsPage() {
               </button>
 
               {/* Modal Graphic Display Header */}
-              <div className="w-full aspect-[16/10] border-3 border-[#111111] dark:border-[#F7F7F2] rounded-2xl relative overflow-hidden bg-white dark:bg-[#1A1A1A]">
+              <div className="w-full h-[55vh] sm:h-[65vh] max-h-[520px] border-3 border-[#111111] dark:border-[#F7F7F2] rounded-2xl relative overflow-hidden bg-[#0D0D11] dark:bg-[#111111] flex items-center justify-center p-2">
                 {activeCredential.image ? (
                   <Image
                     src={activeCredential.image}
                     alt={`${activeCredential.title} full certificate`}
                     fill
-                    sizes="(max-width: 768px) 100vw, 800px"
+                    sizes="(max-width: 1024px) 100vw, 900px"
                     className="object-contain object-center rounded-xl"
+                    priority
                   />
                 ) : (
                   <div className="relative z-10 space-y-3 p-4 text-center flex flex-col items-center justify-center h-full">
@@ -377,17 +379,27 @@ export default function CertificationsPage() {
               </div>
 
               {/* Modal Footer */}
-              <div className="pt-4 border-t-2 border-[#111111] dark:border-[#F7F7F2] flex items-center justify-between">
+              <div className="pt-4 border-t-2 border-[#111111] dark:border-[#F7F7F2] flex flex-wrap items-center justify-between gap-3">
                 <span className="font-mono text-xs font-black text-[#635BFF] dark:text-[#FFD600] flex items-center gap-1">
                   <CheckCircle2 className="w-4 h-4" />
                   AUTHENTICITY VERIFIED
                 </span>
-                <button
-                  onClick={() => setActiveCredential(null)}
-                  className="px-5 py-2 font-mono text-xs font-black bg-[#111111] dark:bg-[#F7F7F2] text-white dark:text-[#111111] border-2 border-[#111111] rounded-lg brutal-shadow-sm hover:bg-[#FFD600] hover:text-[#111111] transition-colors uppercase"
-                >
-                  CLOSE [ESC]
-                </button>
+                <div className="flex items-center gap-3">
+                  {activeCredential.id === "nasa-space-apps-2026" && (
+                    <Link
+                      href="/projects/nasas-forgotten-legacy"
+                      className="px-4 py-2 font-mono text-xs font-black bg-[#FFD600] text-[#111111] border-2 border-[#111111] rounded-lg brutal-shadow-sm hover:translate-x-0.5 hover:translate-y-0.5 transition-transform uppercase"
+                    >
+                      VIEW CASE STUDY ➔
+                    </Link>
+                  )}
+                  <button
+                    onClick={() => setActiveCredential(null)}
+                    className="px-5 py-2 font-mono text-xs font-black bg-[#111111] dark:bg-[#F7F7F2] text-white dark:text-[#111111] border-2 border-[#111111] rounded-lg brutal-shadow-sm hover:bg-[#FFD600] hover:text-[#111111] transition-colors uppercase"
+                  >
+                    CLOSE [ESC]
+                  </button>
+                </div>
               </div>
             </motion.div>
           </div>

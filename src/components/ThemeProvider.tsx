@@ -15,8 +15,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window !== "undefined") {
       const savedTheme = localStorage.getItem("portfolio-theme") as Theme | null;
-      if (savedTheme) return savedTheme;
-      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      if (savedTheme === "dark" || savedTheme === "light") return savedTheme;
+      return "light";
     }
     return "light";
   });

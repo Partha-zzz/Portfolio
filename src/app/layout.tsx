@@ -54,6 +54,22 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${spaceMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                const savedTheme = localStorage.getItem('portfolio-theme');
+                if (savedTheme === 'dark') {
+                  document.documentElement.classList.add('dark');
+                } else {
+                  document.documentElement.classList.remove('dark');
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
+      </head>
       <body className="min-h-screen flex flex-col bg-[#F7F7F2] dark:bg-[#181818] text-[#111111] dark:text-[#E8E6DF] font-sans selection:bg-[#FFD600] selection:text-[#111111] transition-colors duration-200">
         <ThemeProvider>
           <CustomCursor />

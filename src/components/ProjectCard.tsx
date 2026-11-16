@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import { GithubIcon } from "@/components/Icons";
 import { Project } from "@/data/projects";
@@ -33,27 +35,40 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </div>
 
         {/* Thumbnail Visual Container */}
-        <div
-          className="w-full aspect-[16/9] mb-6 border-3 border-[#111111] dark:border-[#77756F] rounded-xl relative overflow-hidden flex items-center justify-center p-6 transition-transform duration-300 group-hover:scale-[1.01]"
+        <Link
+          href={`/projects/${project.slug}`}
+          className="block w-full aspect-[16/9] mb-6 border-3 border-[#111111] dark:border-[#77756F] rounded-xl relative overflow-hidden flex items-center justify-center p-6 transition-transform duration-300 group-hover:scale-[1.01]"
           style={{ backgroundColor: project.imageBg }}
         >
-          {/* Geometric Pattern Overlay */}
-          <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#111111_2px,transparent_2px)] [background-size:16px_16px]" />
+          {project.image ? (
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
+            />
+          ) : (
+            <>
+              {/* Geometric Pattern Overlay */}
+              <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#111111_2px,transparent_2px)] [background-size:16px_16px]" />
 
-          <div className="relative z-10 text-center">
-            <span className="font-black text-2xl sm:text-3xl md:text-4xl tracking-tighter text-[#111111] bg-white px-4 py-2 border-3 border-[#111111] rounded-lg brutal-shadow-sm inline-block uppercase">
-              {project.title}
-            </span>
-          </div>
+              <div className="relative z-10 text-center">
+                <span className="font-black text-2xl sm:text-3xl md:text-4xl tracking-tighter text-[#111111] bg-white px-4 py-2 border-3 border-[#111111] rounded-lg brutal-shadow-sm inline-block uppercase">
+                  {project.title}
+                </span>
+              </div>
+            </>
+          )}
 
           <div className="absolute bottom-3 right-3 z-10 font-mono text-xs font-bold bg-[#111111] text-white px-2.5 py-1 rounded border border-[#111111]">
             CASE STUDY ➔
           </div>
-        </div>
+        </Link>
 
         {/* Title & Short Description */}
         <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#111111] dark:text-[#E8E6DF] uppercase tracking-tight mb-3 group-hover:text-[#635BFF] dark:group-hover:text-[#E8C400] transition-colors">
-          {project.title}
+          <Link href={`/projects/${project.slug}`}>{project.title}</Link>
         </h3>
         <p className="text-sm sm:text-base font-medium text-[#111111]/80 dark:text-[#B8B6AE] leading-relaxed mb-6">
           {project.description}
@@ -62,6 +77,26 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
       {/* Tech Tags & Links */}
       <div>
+        {/* Prominent Achievement Badge if awarded */}
+        {project.achievementBadge && (
+          <div className="mb-4 bg-[#FFD600] dark:bg-[#E8C400] text-[#111111] border-2 border-[#111111] rounded-xl p-3 brutal-shadow-sm flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2.5">
+              <span className="text-xl shrink-0">🏆</span>
+              <div>
+                <span className="block font-mono text-[10px] font-black uppercase tracking-wider text-[#111111]/80">
+                  {project.achievementBadge.event}
+                </span>
+                <span className="font-mono text-xs sm:text-sm font-black uppercase text-[#111111] tracking-tight">
+                  {project.achievementBadge.award}
+                </span>
+              </div>
+            </div>
+            <span className="font-mono text-[9px] font-black px-2 py-0.5 bg-[#111111] text-[#FFD600] rounded uppercase shrink-0">
+              TEAM AWARD
+            </span>
+          </div>
+        )}
+
         <div className="flex flex-wrap gap-2 mb-6">
           {project.technologies.map((tech) => (
             <span
@@ -84,24 +119,28 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </BrutalButton>
 
           <div className="flex items-center gap-2">
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 border-2 border-[#111111] dark:border-[#77756F] bg-white dark:bg-[#272727] text-[#111111] dark:text-[#E8E6DF] hover:bg-[#635BFF] hover:text-white dark:hover:bg-[#E8C400] dark:hover:text-[#111111] rounded-lg brutal-shadow-sm transition-colors"
-              aria-label={`GitHub Repository for ${project.title}`}
-            >
-              <GithubIcon className="w-5 h-5" />
-            </a>
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 border-2 border-[#111111] dark:border-[#77756F] bg-white dark:bg-[#272727] text-[#111111] dark:text-[#E8E6DF] hover:bg-[#635BFF] hover:text-white dark:hover:bg-[#E8C400] dark:hover:text-[#111111] rounded-lg brutal-shadow-sm transition-colors"
+                aria-label={`GitHub Repository for ${project.title}`}
+              >
+                <GithubIcon className="w-5 h-5" />
+              </a>
+            )}
             {project.demo && (
               <a
                 href={project.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 border-2 border-[#111111] dark:border-[#F7F7F2] bg-[#FFD600] hover:bg-[#ffe033] text-[#111111] rounded-lg brutal-shadow-sm transition-colors"
-                aria-label={`Live Demo for ${project.title}`}
+                className="p-2 border-2 border-[#111111] dark:border-[#F7F7F2] bg-[#FFD600] hover:bg-[#ffe033] text-[#111111] rounded-lg brutal-shadow-sm transition-colors flex items-center gap-1.5 font-mono text-xs font-black uppercase px-3"
+                aria-label={`Visit live website for ${project.title}`}
+                title="Visit Live Website"
               >
-                <ExternalLink className="w-5 h-5 stroke-[2.5]" />
+                <span>VISIT LIVE</span>
+                <ExternalLink className="w-4 h-4 stroke-[2.5]" />
               </a>
             )}
           </div>
